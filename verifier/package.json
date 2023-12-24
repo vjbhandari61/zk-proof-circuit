@@ -1,0 +1,25 @@
+{
+  "name": "hardhat-project",
+  "scripts": {
+    "start": "node server.js",
+    "compile": "cd circuit/utils/ && circom ../src/circuit.circom --wasm --r1cs --sym --c",
+    "witness": "node circuit/utils/circuit_js/generate_witness.js circuit/utils/circuit_js/circuit.wasm circuit/input.json circuit/witness/witness.wtns",
+    "genProof": "snarkjs groth16 prove circuit/keys/circuit_0001.zkey circuit/witness/witness.wtns circuit/proofs/proof.json circuit/proofs/public.json",
+    "contract": "npx hardhat compile",
+    "deploy": "npx hardhat run scripts/deploy.js --network rinkeby"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^1.0.1",
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "hardhat": "^2.10.1",
+    "js-sha256": "^0.9.0"
+  },
+  "dependencies": {
+    "circomlib": "^2.0.5",
+    "dotenv": "^16.0.1",
+    "web3": "^1.7.4"
+  }
+}
